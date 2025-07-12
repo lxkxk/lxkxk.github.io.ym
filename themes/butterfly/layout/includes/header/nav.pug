@@ -5,6 +5,43 @@ nav#nav
         img.site-icon(src=url_for(theme.nav.logo) alt='Logo')
       if theme.nav.display_title
         span.site-name=config.title
+    #tp-weather-widget
+
+      script.
+        (function (a, h, g, f, e, d, c, b) {
+          b = function () {
+            d = h.createElement(g);
+            c = h.getElementsByTagName(g)[0];
+            d.src = e;
+            d.charset = "utf-8";
+            d.async = 1;
+            c.parentNode.insertBefore(d, c);
+          };
+          a["SeniverseWeatherWidgetObject"] = f;
+          a[f] || (a[f] = function () {
+            (a[f].q = a[f].q || []).push(arguments);
+          });
+          a[f].l = +new Date();
+          if (a.attachEvent) {
+            a.attachEvent("onload", b);
+          } else {
+            a.addEventListener("load", b, false);
+          }
+        })(window, document, "script", "SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10));
+
+       window.addEventListener("load", function () {
+          SeniverseWeatherWidget("show", {
+            hover: "enabled",
+            container: "tp-weather-widget",
+            flavor: "slim",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "7711d625-cb7f-446b-bb2b-c2c757e1993b",
+          });
+        });
+
     if globalPageType === 'post' && theme.nav.display_post_title
       a.nav-page-title(href=url_for('/'))
         span.site-name=(page.title || config.title)
